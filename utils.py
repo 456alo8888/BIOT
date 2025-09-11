@@ -7,6 +7,7 @@ from scipy.signal import resample
 from scipy.signal import butter, iirnotch, filtfilt
 from scipy.interpolate import interp1d
 from scipy.signal import butter, lfilter
+import lmdb
 
 
 class TUABLoader(torch.utils.data.Dataset):
@@ -134,6 +135,56 @@ class HARLoader(torch.utils.data.Dataset):
         return torch.FloatTensor(X), y
 
 
+class TUEG108Loader(torch.utils.data.Dataset):
+    def __init__(self, root_tueg108):
+        LENGTH = 6000
+        WINDOW_SIZE = 200
+
+        self.root_tueg108 = root_tueg108
+        self.env = lmdb.open(
+            self.root_tueg108,
+            readonly=True,
+            lock=False,
+            readahead=True,
+            meminit=False
+        )
+        with self.env.begin(write=False) as txn:
+            self.tueg108_list = pickle.loads(txn.get('__keys__'.encode()))
+
+        print(f"TUEG108 pretrain data size: {len(self.tueg108_list)}")
+
+        # Nếu dùng masked modeling thì mới cần
+        self.tueg_108_idx_all = np.arange(LENGTH // WINDOW_SIZE)
+        self.tueg_108_mask_idx_N = LENGTH // WINDOW_SIZE // 5
+
+    def __len__(self):
+        return len(self.tueg108_list)
+
+    def tueg108_load(self, index):
+        sample_key = self.tueg108_list[index]
+        with self.env.begin(write=False) as txn:
+            byteflow = txn.get(sample_key.encode())
+            sample = pickle.loads(byteflow)
+
+        # normalize theo quantile
+        sample = sample / (
+            np.quantile(
+                np.abs(sample), q=0.95,
+                interpolation="linear", axis=-1, keepdims=True
+            ) + 1e-8
+        )
+
+        samples = torch.FloatTensor(sample)
+        return samples, 1  # nhãn = 1 (fixed)
+
+    def __getitem__(self, index):
+        return self.tueg108_load(index)
+
+    def __del__(self):
+        if hasattr(self, "env") and self.env is not None:
+            self.env.close()
+
+
 class UnsupervisedPretrainLoader(torch.utils.data.Dataset):
     def __init__(self, root_prest, root_shhs):
 
@@ -161,6 +212,8 @@ class UnsupervisedPretrainLoader(torch.utils.data.Dataset):
         print("(shhs) unlabeled data size:", len(self.shhs_list))
         self.shhs_idx_all = np.arange(SHHS_LENGTH // WINDOW_SIZE)
         self.shhs_mask_idx_N = SHHS_LENGTH // WINDOW_SIZE // 5
+
+        
 
     def __len__(self):
         return len(self.prest_list) + len(self.shhs_list)
@@ -205,6 +258,8 @@ class UnsupervisedPretrainLoader(torch.utils.data.Dataset):
         samples = torch.FloatTensor(samples)
 
         return samples, 1
+    
+    
 
     def __getitem__(self, index):
         if index < len(self.prest_list):

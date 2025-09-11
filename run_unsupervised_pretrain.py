@@ -15,6 +15,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 
 from model import UnsupervisedPretrain
+from utils import TUEG108Loader
 from utils import UnsupervisedPretrainLoader, collate_fn_unsupervised_pretrain
 
      
@@ -34,39 +35,56 @@ class LitModel_supervised_pretrain(pl.LightningModule):
                 filepath=f"{self.save_path}/epoch={self.current_epoch}_step={self.global_step}.ckpt"
             )
 
-        prest_samples, shhs_samples = batch
+        tueg108_samples = batch
         contrastive_loss = 0
 
-        if len(prest_samples) > 0:
-            """
-            For prest
-            """
-            prest_masked_emb, prest_samples_emb = self.model(prest_samples, 0)
+        # if len(prest_samples) > 0:
+        #     """
+        #     For prest
+        #     """
+        #     prest_masked_emb, prest_samples_emb = self.model(prest_samples, 0)
 
-            # L2 normalize
-            prest_samples_emb = F.normalize(prest_samples_emb, dim=1, p=2)
-            prest_masked_emb = F.normalize(prest_masked_emb, dim=1, p=2)
-            N = prest_samples.shape[0]
+        #     # L2 normalize
+        #     prest_samples_emb = F.normalize(prest_samples_emb, dim=1, p=2)
+        #     prest_masked_emb = F.normalize(prest_masked_emb, dim=1, p=2)
+        #     N = prest_samples.shape[0]
 
-            # representation similarity matrix, NxN
-            logits = torch.mm(prest_samples_emb, prest_masked_emb.t()) / self.T
-            labels = torch.arange(N).to(logits.device)
-            contrastive_loss += F.cross_entropy(logits, labels, reduction="mean")
+        #     # representation similarity matrix, NxN
+        #     logits = torch.mm(prest_samples_emb, prest_masked_emb.t()) / self.T
+        #     labels = torch.arange(N).to(logits.device)
+        #     contrastive_loss += F.cross_entropy(logits, labels, reduction="mean")
 
         """
         For shhs
         """
-        shhs_masked_emb, shhs_samples_emb = self.model(shhs_samples, 16)
+        # shhs_masked_emb, shhs_samples_emb = self.model(shhs_samples, 16)
 
-        # For shhs
-        shhs_samples_emb = F.normalize(shhs_samples_emb, dim=1, p=2)
-        shhs_masked_emb = F.normalize(shhs_masked_emb, dim=1, p=2)
-        N = shhs_samples_emb.shape[0]
+        # # For shhs
+        # shhs_samples_emb = F.normalize(shhs_samples_emb, dim=1, p=2)
+        # shhs_masked_emb = F.normalize(shhs_masked_emb, dim=1, p=2)
+        # N = shhs_samples_emb.shape[0]
+
+        # # representation similarity matrix, NxN
+        # logits = torch.mm(shhs_samples_emb, shhs_masked_emb.t()) / self.T
+        # labels = torch.arange(N).to(logits.device)
+        # contrastive_loss += F.cross_entropy(logits, labels, reduction="mean")
+
+
+
+
+        """
+        For TUEG 108
+        """
+        tueg108_masked_emb, tueg108_samples_emb = self.model(tueg108_samples, 0)
+        tueg108_samples_emb = F.normalize(tueg108_samples_emb, dim=1, p=2)
+        tueg108_masked_emb = F.normalize(tueg108_masked_emb, dim=1, p=2)
+        N = tueg108_samples_emb.shape[0]
 
         # representation similarity matrix, NxN
-        logits = torch.mm(shhs_samples_emb, shhs_masked_emb.t()) / self.T
+        logits = torch.mm(tueg108_samples_emb, tueg108_masked_emb.t()) / self.T
         labels = torch.arange(N).to(logits.device)
         contrastive_loss += F.cross_entropy(logits, labels, reduction="mean")
+
 
         self.log("train_loss", contrastive_loss)
         return contrastive_loss
@@ -85,7 +103,32 @@ class LitModel_supervised_pretrain(pl.LightningModule):
 
         return [optimizer], [scheduler]
 
+# Loader for SHHS and PREST data
+# def prepare_dataloader(args):
+#     # set random seed
+#     seed = 12345
+#     torch.manual_seed(seed)
+#     torch.cuda.manual_seed(seed)
+#     torch.cuda.manual_seed_all(seed)
+#     np.random.seed(seed)
+
+#     # define the (seizure) data loader
+#     root_prest = "/srv/local/data/IIIC_data/5M_IIIC_data/processed/s7n16"
+#     root_shhs = "/srv/local/data/SHHS/processed"
+#     loader = UnsupervisedPretrainLoader(root_prest, root_shhs)
+#     train_loader = torch.utils.data.DataLoader(
+#         loader,
+#         batch_size=args.batch_size,
+#         shuffle=True,
+#         num_workers=args.num_workers,
+#         persistent_workers=True,
+#         drop_last=True,
+#         collate_fn=collate_fn_unsupervised_pretrain,
+#     )
     
+#     return train_loader
+
+# Loader for TUEG108 data 
 def prepare_dataloader(args):
     # set random seed
     seed = 12345
@@ -95,9 +138,10 @@ def prepare_dataloader(args):
     np.random.seed(seed)
 
     # define the (seizure) data loader
-    root_prest = "/srv/local/data/IIIC_data/5M_IIIC_data/processed/s7n16"
-    root_shhs = "/srv/local/data/SHHS/processed"
-    loader = UnsupervisedPretrainLoader(root_prest, root_shhs)
+    root_tueg108 = args.root_tueg108
+
+    loader = TUEG108Loader(root_tueg108)
+
     train_loader = torch.utils.data.DataLoader(
         loader,
         batch_size=args.batch_size,
@@ -105,31 +149,31 @@ def prepare_dataloader(args):
         num_workers=args.num_workers,
         persistent_workers=True,
         drop_last=True,
-        collate_fn=collate_fn_unsupervised_pretrain,
     )
     
     return train_loader
+
+
  
  
 def pretrain(args):
     
     # get data loaders
     train_loader = prepare_dataloader(args)
+
+    os.make_dirs(f"{args.log_root}" , exist_ok = True)
     
     # define the trainer
     N_version = (
-        len(os.listdir(os.path.join("log-pretrain"))) + 1
+        len(os.listdir(os.path.join(f"{args.log_root}"))) + 1
     )
+
     # define the model
-    save_path = f"log-pretrain/{N_version}-unsupervised/checkpoints"
-    
+    save_path = f"{args.log_root}/{N_version}-unsupervised/checkpoints"
     model = LitModel_supervised_pretrain(args, save_path)
-    
-    logger = TensorBoardLogger(
-        save_dir="/home/chaoqiy2/github/LEM",
-        version=f"{N_version}/checkpoints",
-        name="log-pretrain",
-    )
+
+
+
     trainer = pl.Trainer(
         devices=[2],
         accelerator="gpu",
@@ -137,7 +181,6 @@ def pretrain(args):
         auto_select_gpus=True,
         benchmark=True,
         enable_checkpointing=True,
-        logger=logger,
         max_epochs=args.epochs,
     )
 
@@ -152,6 +195,8 @@ if __name__ == "__main__":
     parser.add_argument("--weight_decay", type=float, default=1e-5, help="weight decay")
     parser.add_argument("--batch_size", type=int, default=1024, help="batch size")
     parser.add_argument("--num_workers", type=int, default=32, help="number of workers")
+    parser.add_argument("--root_tueg108", type = str, default = "/home/user01/aiotlab/pqhung/EEG/108CMH" , help = "root folder of pretrain data")
+    parser.add_argument("--log_root", type = str , default= "log-pretrain", help = "root path for logging pretrain checkpoints")
     args = parser.parse_args()
     print (args)
 

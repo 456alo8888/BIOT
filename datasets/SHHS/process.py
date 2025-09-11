@@ -71,12 +71,15 @@ if __name__ == "__main__":
     parser.add_argument(
         "--multiprocess", type=int, default=30, help="How many processes to use"
     )
+    parser.add_argument(
+        "--root_folder", type = str , default= "/srv/local/data/SHHS/", help = "Root folder for .edf files"
+    )
     args = parser.parse_args()
 
     if not os.path.exists("./processed/"):
         os.makedirs("./processed/")
 
-    root_folder = "/srv/local/data/SHHS/"
+    root_folder = args.root_folder
 
     N, epoch_sec = args.multiprocess, args.windowsize
     p_list = []

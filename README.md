@@ -134,3 +134,17 @@ python run_multiclass_supervised.py --dataset TUEV --in_channels 18 --n_classes 
   year={2023}
 }
 ```
+
+## 6. Pretraining on TUEGx108 dataset 
+
+Run run_unsupervised_pretrain.py with args 
+
+
+##### Reference Runs
+```bash
+python run_unsupervised_pretrain.py --epochs 100 --lr 1e-4 --weight_decay 1e-5 --batch_size 1024 --num_workers 32 --root_tueg108 /home/user01/aiotlab/pqhung/EEG/108CMH --log_root log-pretrain
+```
+
+
+
+
