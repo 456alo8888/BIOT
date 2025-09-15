@@ -15,8 +15,52 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 
 from model import UnsupervisedPretrain
-from utils import TUEG108Loader
 from utils import UnsupervisedPretrainLoader, collate_fn_unsupervised_pretrain
+
+import pickle
+
+import lmdb
+from torch.utils.data import Dataset, DataLoader
+
+from typing import List
+
+def to_tensor(array):
+    return torch.from_numpy(array).float()
+
+class MergedPretrainingDataset(Dataset):
+    def __init__(
+            self,
+            dataset_dirs: List[str]
+    ):
+        super(MergedPretrainingDataset, self).__init__()
+        self.dbs = [lmdb.open(dataset_dir, readonly=True, lock=False, readahead=True, meminit=False) for dataset_dir in dataset_dirs]
+        self.keys = []
+        for db_idx, db in enumerate(self.dbs):
+            with db.begin(write=False) as txn:
+                raw = txn.get('__keys__'.encode())
+                if raw is None:
+                    continue
+                keys = pickle.loads(raw)
+                # Store (key, db_idx) pairs
+                self.keys.extend((k, db_idx) for k in keys)
+        # self.keys = self.keys[:100000]
+
+    def __len__(self):
+        return len(self.keys)
+
+    def __getitem__(self, idx):
+        key, db_idx = self.keys[idx]
+
+        with self.dbs[db_idx].begin(write=False) as txn:
+            key_bytes = key if isinstance(key, bytes) else key.encode()
+            raw = txn.get(key_bytes)
+            if raw is None:
+                raise KeyError(f"Key '{key}' not found in LMDB index {db_idx}")
+            patch = pickle.loads(raw)
+
+        patch = to_tensor(patch)
+        # print(patch.shape)
+        return torch.flatten(patch, -2, -1)
 
      
 class LitModel_supervised_pretrain(pl.LightningModule):
@@ -25,7 +69,7 @@ class LitModel_supervised_pretrain(pl.LightningModule):
         self.args = args
         self.save_path = save_path
         self.T = 0.2
-        self.model = UnsupervisedPretrain(emb_size=256, heads=8, depth=4, n_channels=18) # 16 for PREST (resting) + 2 for SHHS (sleeping)
+        self.model = UnsupervisedPretrain(emb_size=256, heads=8, depth=4, n_channels=19) # 16 for PREST (resting) + 2 for SHHS (sleeping)
         
     def training_step(self, batch, batch_idx):
 
@@ -137,19 +181,20 @@ def prepare_dataloader(args):
     torch.cuda.manual_seed_all(seed)
     np.random.seed(seed)
 
-    # define the (seizure) data loader
-    root_tueg108 = args.root_tueg108
-
-    loader = TUEG108Loader(root_tueg108)
-
-    train_loader = torch.utils.data.DataLoader(
-        loader,
-        batch_size=args.batch_size,
-        shuffle=True,
-        num_workers=args.num_workers,
-        persistent_workers=True,
-        drop_last=True,
-    )
+    list_dirs = [
+        '/home/user01/aiotlab/pqhung/CBraMod/data/dummy_data_ica',
+        '/home/user01/aiotlab/pqhung/CBraMod/data/dummy_data_ica_108_2022_big',
+        '/home/user01/aiotlab/pqhung/CBraMod/data/dummy_data_ica_a7',
+        '/home/user01/aiotlab/pqhung/CBraMod/data/dummy_data_ica_c2b',
+        '/home/user01/aiotlab/pqhung/CBraMod/data/dummy_data_ica_phutho',
+        '/home/user01/aiotlab/pqhung/CBraMod/data/nmt_scalp_eeg_dataset',
+        '/home/user01/aiotlab/pqhung/CBraMod/data/TUEG',
+        # '/mnt/disk1/aiotlab/namth/EEGFoundationModel/datasets/dummy_data_ica_a7',
+        # '/mnt/disk1/aiotlab/namth/EEGFoundationModel/datasets/dummy_data_ica_a7'
+        
+    ]
+    pretrained_dataset = MergedPretrainingDataset(list_dirs)
+    train_loader = DataLoader(pretrained_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, persistent_workers=True, drop_last=True)
     
     return train_loader
 
@@ -161,7 +206,7 @@ def pretrain(args):
     # get data loaders
     train_loader = prepare_dataloader(args)
 
-    os.make_dirs(f"{args.log_root}" , exist_ok = True)
+    os.makedirs(f"{args.log_root}" , exist_ok = True)
     
     # define the trainer
     N_version = (
@@ -175,10 +220,9 @@ def pretrain(args):
 
 
     trainer = pl.Trainer(
-        devices=[2],
+        devices=0,
         accelerator="gpu",
         strategy=DDPStrategy(find_unused_parameters=False),
-        auto_select_gpus=True,
         benchmark=True,
         enable_checkpointing=True,
         max_epochs=args.epochs,
@@ -194,7 +238,7 @@ if __name__ == "__main__":
     parser.add_argument("--lr", type=float, default=1e-4, help="learning rate")
     parser.add_argument("--weight_decay", type=float, default=1e-5, help="weight decay")
     parser.add_argument("--batch_size", type=int, default=1024, help="batch size")
-    parser.add_argument("--num_workers", type=int, default=32, help="number of workers")
+    parser.add_argument("--num_workers", type=int, default=8, help="number of workers")
     parser.add_argument("--root_tueg108", type = str, default = "/home/user01/aiotlab/pqhung/EEG/108CMH" , help = "root folder of pretrain data")
     parser.add_argument("--log_root", type = str , default= "log-pretrain", help = "root path for logging pretrain checkpoints")
     args = parser.parse_args()
