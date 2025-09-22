@@ -1,0 +1,12 @@
+{"time":"2025-09-21T15:14:21.904479238+07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-21T15:14:22.366284623+07:00","level":"INFO","msg":"stream: created new stream","id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:22.366352004+07:00","level":"INFO","msg":"stream: started","id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:22.366394168+07:00","level":"INFO","msg":"handler: started","stream_id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:22.366390554+07:00","level":"INFO","msg":"sender: started","stream_id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:22.36639536+07:00","level":"INFO","msg":"writer: Do: started","stream_id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:28.81075982+07:00","level":"INFO","msg":"stream: closing","id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:30.156894845+07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-21T15:14:30.553762208+07:00","level":"INFO","msg":"handler: closed","stream_id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:30.553852042+07:00","level":"INFO","msg":"sender: closed","stream_id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:30.553841548+07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gtvikrwa"}
+{"time":"2025-09-21T15:14:30.554043625+07:00","level":"INFO","msg":"stream: closed","id":"gtvikrwa"}

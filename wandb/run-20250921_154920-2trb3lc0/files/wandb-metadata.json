@@ -1,0 +1,76 @@
+{
+  "os":  "Linux-6.8.0-65-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.12.7",
+  "startedAt":  "2025-09-21T08:49:20.381569Z",
+  "args":  [
+    "--dataset",
+    "NMF",
+    "--in_channels",
+    "1",
+    "--n_classes",
+    "94",
+    "--sampling_rate",
+    "200",
+    "--token_size",
+    "200",
+    "--hop_length",
+    "100",
+    "--sample_length",
+    "5",
+    "--batch_size",
+    "128",
+    "--model",
+    "BIOT",
+    "--datasets_dir",
+    "/mnt/disk1/aiotlab/namth/EEGFoundationModel/datasets/nfm"
+  ],
+  "program":  "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/run_multiclass_supervised.py",
+  "codePath":  "run_multiclass_supervised.py",
+  "codePathLocal":  "run_multiclass_supervised.py",
+  "git":  {
+    "remote":  "https://github.com/456alo8888/BIOT.git",
+    "commit":  "f984073c89bff355a59ba780887c15e30875d2bd"
+  },
+  "email":  "phunghieu5c@gmail.com",
+  "root":  ".",
+  "host":  "gpus-Super-Server",
+  "executable":  "/mnt/disk1/aiotlab/envs/hieupcvp/bin/python",
+  "cpu_count":  20,
+  "cpu_count_logical":  40,
+  "gpu":  "NVIDIA A30",
+  "gpu_count":  3,
+  "disk":  {
+    "/":  {
+      "total":  "943412031488",
+      "used":  "752333766656"
+    }
+  },
+  "memory":  {
+    "total":  "134794272768"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A30",
+      "memoryTotal":  "25769803776",
+      "cudaCores":  3584,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-97533177-ae5d-752f-8fac-73c43a1a67cc"
+    },
+    {
+      "name":  "NVIDIA A30",
+      "memoryTotal":  "25769803776",
+      "cudaCores":  3584,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-b71aa699-b956-12eb-ded3-7590ec6c9937"
+    },
+    {
+      "name":  "NVIDIA A30",
+      "memoryTotal":  "25769803776",
+      "cudaCores":  3584,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-1ae02fa8-11a1-fd0d-1711-434d9c42d9ef"
+    }
+  ],
+  "cudaVersion":  "12.2",
+  "writerId":  "l9uxox1xerjkdab8w8f3j0naaercfka8"
+}

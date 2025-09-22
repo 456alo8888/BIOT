@@ -1,0 +1,12 @@
+{"time":"2025-09-22T00:45:59.749106139+07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-22T00:46:00.211339468+07:00","level":"INFO","msg":"stream: created new stream","id":"u0902efi"}
+{"time":"2025-09-22T00:46:00.211411418+07:00","level":"INFO","msg":"stream: started","id":"u0902efi"}
+{"time":"2025-09-22T00:46:00.211464658+07:00","level":"INFO","msg":"writer: Do: started","stream_id":"u0902efi"}
+{"time":"2025-09-22T00:46:00.211501528+07:00","level":"INFO","msg":"handler: started","stream_id":"u0902efi"}
+{"time":"2025-09-22T00:46:00.211459143+07:00","level":"INFO","msg":"sender: started","stream_id":"u0902efi"}
+{"time":"2025-09-22T00:46:09.272481699+07:00","level":"INFO","msg":"stream: closing","id":"u0902efi"}
+{"time":"2025-09-22T00:46:10.58668441+07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-22T00:46:10.957415197+07:00","level":"INFO","msg":"handler: closed","stream_id":"u0902efi"}
+{"time":"2025-09-22T00:46:10.957514348+07:00","level":"INFO","msg":"sender: closed","stream_id":"u0902efi"}
+{"time":"2025-09-22T00:46:10.957501012+07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"u0902efi"}
+{"time":"2025-09-22T00:46:10.95764314+07:00","level":"INFO","msg":"stream: closed","id":"u0902efi"}

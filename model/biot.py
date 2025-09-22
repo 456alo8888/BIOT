@@ -78,7 +78,7 @@ class BIOTEncoder(nn.Module):
 
         self.n_fft = n_fft
         self.hop_length = hop_length
-
+        self.win_length = n_fft  # Set win_length equal to n_fft (common practice)
         self.patch_embedding = PatchFrequencyEmbedding(
             emb_size=emb_size, n_freq=self.n_fft // 2 + 1
         )
@@ -97,10 +97,14 @@ class BIOTEncoder(nn.Module):
         self.index = nn.Parameter(
             torch.LongTensor(range(n_channels)), requires_grad=False
         )
+        self.window = torch.hann_window(self.win_length)  # Initialize Hann window
+        # Other initialization code (e.g., other layers)...
 
     def stft(self, sample):
+        x = sample
+        x = x.view(x.size(0), -1)  # Reshape to (batch_size, 800)
         spectral = torch.stft( 
-            input = sample.squeeze(1),
+            x,
             n_fft = self.n_fft,
             hop_length = self.hop_length,
             center = False,
@@ -108,6 +112,22 @@ class BIOTEncoder(nn.Module):
             return_complex = True,
         )
         return torch.abs(spectral)
+
+    # def stft(self, x):
+    #     # x shape: (batch_size, 1, 4, 200) after slicing x[:, i : i + 1, :]
+    #     # Flatten the last two dimensions to (batch_size, 4 * 200)
+    #     x = x.view(x.size(0), -1)  # Reshape to (batch_size, 800)
+    #     window = torch.hann_window(self.win_length, device=x.device)
+    #     spectral = torch.stft(
+    #         x,
+    #         n_fft=self.n_fft,
+    #         hop_length=self.hop_length,
+    #         win_length=self.win_length,
+    #         window=window,
+    #         onesided=True,
+    #         return_complex=True
+    #     )
+    #     return torch.abs(spectral)
 
     def forward(self, x, n_channel_offset=0, perturb=False):
         """

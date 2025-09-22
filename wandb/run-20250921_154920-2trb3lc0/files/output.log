@@ -1,0 +1,83 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+You are using a CUDA device ('NVIDIA A30') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2]
+
+  | Name  | Type           | Params
+-----------------------------------------
+0 | model | BIOTClassifier | 3.2 M
+-----------------------------------------
+3.2 M     Trainable params
+1         Non-trainable params
+3.2 M     Total params
+12.826    Total estimated model params size (MB)
+Sanity Checking: 0it [00:00, ?it/s]
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:488: PossibleUserWarning: Your `val_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
+  rank_zero_warn(
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 40 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/run_multiclass_supervised.py", line 401, in <module>
+[rank0]:     supervised(args)
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/run_multiclass_supervised.py", line 345, in supervised
+[rank0]:     trainer.fit(
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 608, in fit
+[rank0]:     call._call_and_handle_interrupt(
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 36, in _call_and_handle_interrupt
+[rank0]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 88, in launch
+[rank0]:     return function(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 650, in _fit_impl
+[rank0]:     self._run(model, ckpt_path=self.ckpt_path)
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1112, in _run
+[rank0]:     results = self._run_stage()
+[rank0]:               ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1191, in _run_stage
+[rank0]:     self._run_train()
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1204, in _run_train
+[rank0]:     self._run_sanity_check()
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1276, in _run_sanity_check
+[rank0]:     val_loop.run()
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+[rank0]:     self.advance(*args, **kwargs)
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 152, in advance
+[rank0]:     dl_outputs = self.epoch_loop.run(self._data_fetcher, dl_max_batches, kwargs)
+[rank0]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+[rank0]:     self.advance(*args, **kwargs)
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 121, in advance
+[rank0]:     batch = next(data_fetcher)
+[rank0]:             ^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/utilities/fetching.py", line 184, in __next__
+[rank0]:     return self.fetching_function()
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/utilities/fetching.py", line 265, in fetching_function
+[rank0]:     self._fetch_next_batch(self.dataloader_iter)
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/utilities/fetching.py", line 280, in _fetch_next_batch
+[rank0]:     batch = next(iterator)
+[rank0]:             ^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 734, in __next__
+[rank0]:     data = self._next_data()
+[rank0]:            ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 790, in _next_data
+[rank0]:     data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+[rank0]:     data = [self.dataset[idx] for idx in possibly_batched_index]
+[rank0]:             ~~~~~~~~~~~~^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/datasets/nfeeg_dataset.py", line 37, in __getitem__
+[rank0]:     pair = pickle.loads(txn.get(key.encode()))
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: AttributeError: Can't get attribute '_frombuffer' on <module 'numpy' from '/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/numpy/__init__.py'>

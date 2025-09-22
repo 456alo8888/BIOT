@@ -1,0 +1,73 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+You are using a CUDA device ('NVIDIA A30') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2]
+
+  | Name  | Type           | Params
+-----------------------------------------
+0 | model | BIOTClassifier | 3.2 M
+-----------------------------------------
+3.2 M     Trainable params
+22        Non-trainable params
+3.2 M     Total params
+12.755    Total estimated model params size (MB)
+Sanity Checking DataLoader 0: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.23s/it]{'accuracy': 0.22265625, 'cohen_kappa': 0.0, 'f1_weighted': 0.08109524760383387}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:488: PossibleUserWarning: Your `val_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
+  rank_zero_warn(
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 40 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 0: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:08<00:00,  1.56it/s, loss=1.82, v_num=-100]{'accuracy': 0.2479108635097493, 'cohen_kappa': 0.0, 'f1_weighted': 0.09850029844807003}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 40 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py:1609: PossibleUserWarning: The number of training batches (10) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
+  rank_zero_warn(
+Epoch 1: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.83it/s, loss=1.64, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.0, 'f1_weighted': 0.10050188906328517}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 2: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.87it/s, loss=1.43, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.0, 'f1_weighted': 0.10050188906328517}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 3: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.84it/s, loss=1.4, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.0, 'f1_weighted': 0.10050188906328517}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.87it/s, loss=1.39, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.0, 'f1_weighted': 0.10050188906328517}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 5: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.85it/s, loss=1.39, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.0, 'f1_weighted': 0.10050188906328517}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 5: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.80it/s, loss=1.39, v_num=-100]
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Testing DataLoader 0: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  6.08it/s]
+You are using a CUDA device ('NVIDIA A30') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Restoring states from the checkpoint path at ./pretrain_models/best-epoch=00-val_cohen=0.0000.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2]
+Loaded model weights from checkpoint at ./pretrain_models/best-epoch=00-val_cohen=0.0000.ckpt
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:488: PossibleUserWarning: Your `test_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
+  rank_zero_warn(
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, test_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 40 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃[1m [0m[1m  Runningstage.testing   [0m[1m [0m┃[1m                           [0m┃
+┃[1m [0m[1m         metric          [0m[1m [0m┃[1m [0m[1m      DataLoader 0       [0m[1m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│[36m [0m[36m        test_acc         [0m[36m [0m│[35m [0m[35m   0.2409638613462448    [0m[35m [0m│
+│[36m [0m[36m       test_cohen        [0m[36m [0m│[35m [0m[35m           0.0           [0m[35m [0m│
+│[36m [0m[36m         test_f1         [0m[36m [0m│[35m [0m[35m   0.09357819706201553   [0m[35m [0m│
+└───────────────────────────┴───────────────────────────┘
+{'test_acc': 0.2409638613462448, 'test_cohen': 0.0, 'test_f1': 0.09357819706201553}

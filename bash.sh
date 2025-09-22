@@ -1,0 +1,4 @@
+python run_multiclass_supervised.py --dataset NMF --in_channels 1 --n_classes 94 --sampling_rate 200 --token_size 200 --hop_length 100 --sample_length 5 --batch_size 128 --model BIOT --datasets_dir "/mnt/disk1/aiotlab/namth/EEGFoundationModel/datasets/nfm_for_BIOT"
+python run_multiclass_supervised.py --dataset UET175 --in_channels 22 --n_classes 4 --sampling_rate 200 --token_size 200 --hop_length 100 --sample_length 5 --batch_size 128 --model BIOT --datasets_dir "/mnt/disk1/aiotlab/namth/EEGFoundationModel/datasets/UET175_for_BIOT"
+# python run_multiclass_supervised.py --dataset EEGTALS --in_channels 19 --n_classes 4 --sampling_rate 200 --token_size 200 --hop_length 100 --sample_length 5 --batch_size 64 --model BIOT --datasets_dir "/mnt/disk1/aiotlab/namth/EEGFoundationModel/datasets/als"
+

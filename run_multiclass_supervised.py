@@ -14,6 +14,18 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 from pyhealth.metrics import multiclass_metrics_fn
 
+from datasets.nfeeg_dataset import N_LoadDataset , N_CustomDataset
+from datasets.uet175_dataset import UET_LoadDataset , UETCustomDataset
+import datasets.eegtals_dataset
+# from finetune_trainer import Trainer
+
+from pytorch_lightning.loggers import WandbLogger
+import wandb
+
+wandb.login(key = "9af519f93bfdf0c0ee9458c50cd05342021c9e71")
+
+
+
 from model import (
     SPaRCNet,
     ContraWR,
@@ -197,14 +209,36 @@ def prepare_HAR_dataloader(args):
     print(len(train_loader), len(val_loader), len(test_loader))
     return train_loader, test_loader, val_loader
 
+def prepare_NFEEG_dataloader(args):
+    load_dataset = N_LoadDataset(args)
+    data_loader = load_dataset.get_data_loader()
+    return data_loader
+
+def prepare_UET175_dataloader(args):
+    load_dataset = UET_LoadDataset(args)
+    data_loader = load_dataset.get_data_loader()
+    return data_loader
+
+def prepare_EEGTALS_dataloader(args):
+    load_dataset = datasets.eegtals_dataset.LoadDataset(args)
+    data_loader = load_dataset.get_data_loader()
+    return data_loader
+
 
 def supervised(args):
     # get data loaders
-    if args.dataset == "TUEV":
-        train_loader, test_loader, val_loader = prepare_TUEV_dataloader(args)
-
+    if args.dataset == "NMF":
+        dataloader = prepare_NFEEG_dataloader(args)
+        train_loader, test_loader, val_loader = dataloader['train'] , dataloader['test'] , dataloader['val']
+    elif args.dataset == "UET175":
+        dataloader = prepare_UET175_dataloader(args)
+        train_loader, test_loader, val_loader = dataloader['train'] , dataloader['test'] , dataloader['val']
+    elif args.dataset == "EEGTALS":
+        dataloader = prepare_EEGTALS_dataloader(args)
+        train_loader, test_loader, val_loader = dataloader['train'] , dataloader['test'] , dataloader['val']
     else:
         raise NotImplementedError
+
 
     # define the model
     if args.model == "SPaRCNet":
@@ -270,7 +304,20 @@ def supervised(args):
             hop_length=args.hop_length,
         )
         if args.pretrain_model_path and (args.sampling_rate == 200):
-            model.biot.load_state_dict(torch.load(args.pretrain_model_path))
+
+            ckpt = torch.load(args.pretrain_model_path, map_location="cpu")
+            state_dict = ckpt["state_dict"]  # đây mới là weight thật
+
+            # Nếu state_dict có prefix như "biot.", thì bỏ prefix đi
+            new_state_dict = {}
+            for k, v in state_dict.items():
+                if k.startswith("biot."):
+                    new_state_dict[k.replace("biot.", "")] = v
+                else:
+                    new_state_dict[k] = v
+
+            model.biot.load_state_dict(new_state_dict, strict=False)  # strict=False để bỏ qua mismatch
+            # model.biot.load_state_dict(torch.load(args.pretrain_model_path))
             print(f"load pretrain model from {args.pretrain_model_path}")
 
     else:
@@ -278,27 +325,43 @@ def supervised(args):
     lightning_model = LitModel_finetune(args, model)
 
     # logger and callbacks
+
     version = f"{args.dataset}-{args.model}-{args.lr}-{args.batch_size}-{args.sampling_rate}-{args.token_size}-{args.hop_length}"
     logger = TensorBoardLogger(
         save_dir="./",
         version=version,
         name="log",
     )
+    # Khởi tạo logger
+    exp_name = f"{args.dataset}"
+    wandb_logger = WandbLogger(project="BIOT", name=exp_name)
     early_stop_callback = EarlyStopping(
-        monitor="val_cohen", patience=5, verbose=False, mode="max"
+        monitor="val_cohen", patience=30, verbose=False, mode="max"
+    )
+
+    checkpoint_callback = ModelCheckpoint(
+        monitor="val_cohen",
+        dirpath="./pretrain_models",
+        filename="best-{epoch:02d}-{val_cohen:.4f}",
+        save_top_k=1,
+        mode="max",
     )
 
     trainer = pl.Trainer(
-        devices=[0],
         accelerator="gpu",
+        devices=1,   # hoặc devices=[0] nếu bạn muốn chọn GPU id cụ thể
         strategy=DDPStrategy(find_unused_parameters=False),
-        auto_select_gpus=True,
         benchmark=True,
         enable_checkpointing=True,
-        logger=logger,
+        logger=[wandb_logger, logger],
         max_epochs=args.epochs,
-        callbacks=[early_stop_callback],
+        callbacks=[early_stop_callback, checkpoint_callback],
     )
+
+    # t = Trainer(args, dataloader, model)
+    # t.train_for_multiclass()
+
+    
 
     # train the model
     trainer.fit(
@@ -310,6 +373,9 @@ def supervised(args):
         model=lightning_model, ckpt_path="best", dataloaders=test_loader
     )[0]
     print(pretrain_result)
+
+
+
 
 
 if __name__ == "__main__":
@@ -345,8 +411,12 @@ if __name__ == "__main__":
         "--hop_length", type=int, default=100, help="token hop length (t - p)"
     )
     parser.add_argument(
-        "--pretrain_model_path", type=str, default="", help="pretrained model path"
+        "--pretrain_model_path", type=str, default="/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/pretrained-models/epoch=epoch=39_step=step=382000.ckpt", help="pretrained model path"
     )
+    parser.add_argument('--datasets_dir', type=str,
+                        default='/data/datasets/BigDownstream/Faced/processed',
+                        help='datasets_dir')
+    
     args = parser.parse_args()
     print(args)
 

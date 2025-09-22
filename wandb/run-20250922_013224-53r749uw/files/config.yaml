@@ -1,0 +1,103 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            ssixmca53pcsdpbwo6qt5bum1mktgmkv:
+                args:
+                    - --dataset
+                    - EEGTALS
+                    - --in_channels
+                    - "19"
+                    - --n_classes
+                    - "4"
+                    - --sampling_rate
+                    - "200"
+                    - --token_size
+                    - "200"
+                    - --hop_length
+                    - "100"
+                    - --sample_length
+                    - "5"
+                    - --batch_size
+                    - "64"
+                    - --model
+                    - BIOT
+                    - --datasets_dir
+                    - /mnt/disk1/aiotlab/namth/EEGFoundationModel/datasets/als
+                codePath: run_multiclass_supervised.py
+                codePathLocal: run_multiclass_supervised.py
+                cpu_count: 20
+                cpu_count_logical: 40
+                cudaVersion: "12.2"
+                disk:
+                    /:
+                        total: "943412031488"
+                        used: "752318099456"
+                email: phunghieu5c@gmail.com
+                executable: /mnt/disk1/aiotlab/envs/hieupcvp/bin/python
+                git:
+                    commit: f984073c89bff355a59ba780887c15e30875d2bd
+                    remote: https://github.com/456alo8888/BIOT.git
+                gpu: NVIDIA A30
+                gpu_count: 3
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 3584
+                      memoryTotal: "25769803776"
+                      name: NVIDIA A30
+                      uuid: GPU-97533177-ae5d-752f-8fac-73c43a1a67cc
+                    - architecture: Ampere
+                      cudaCores: 3584
+                      memoryTotal: "25769803776"
+                      name: NVIDIA A30
+                      uuid: GPU-b71aa699-b956-12eb-ded3-7590ec6c9937
+                    - architecture: Ampere
+                      cudaCores: 3584
+                      memoryTotal: "25769803776"
+                      name: NVIDIA A30
+                      uuid: GPU-1ae02fa8-11a1-fd0d-1711-434d9c42d9ef
+                host: gpus-Super-Server
+                memory:
+                    total: "134794272768"
+                os: Linux-6.8.0-65-generic-x86_64-with-glibc2.35
+                program: /mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/run_multiclass_supervised.py
+                python: CPython 3.12.7
+                root: .
+                startedAt: "2025-09-21T18:32:24.069703Z"
+                writerId: ssixmca53pcsdpbwo6qt5bum1mktgmkv
+        m:
+            - "1": trainer/global_step
+              "6":
+                - 3
+              "7": []
+            - "2": '*'
+              "5": 1
+              "6":
+                - 1
+              "7": []
+        python_version: 3.12.7
+        t:
+            "1":
+                - 1
+                - 5
+                - 9
+                - 41
+                - 51
+                - 53
+                - 103
+            "2":
+                - 1
+                - 5
+                - 9
+                - 41
+                - 51
+                - 53
+                - 103
+            "3":
+                - 7
+                - 13
+                - 66
+            "4": 3.12.7
+            "5": 0.21.0
+            "12": 0.21.0
+            "13": linux-x86_64

@@ -1,0 +1,289 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+You are using a CUDA device ('NVIDIA A30') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:613: UserWarning: Checkpoint directory ./pretrain_models exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2]
+
+  | Name  | Type           | Params
+-----------------------------------------
+0 | model | BIOTClassifier | 3.2 M
+-----------------------------------------
+3.2 M     Trainable params
+22        Non-trainable params
+3.2 M     Total params
+12.755    Total estimated model params size (MB)
+Sanity Checking DataLoader 0: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.30it/s]{'accuracy': 0.25, 'cohen_kappa': 0.0, 'f1_weighted': 0.16068376068376067}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/functional.py:730: UserWarning: A window was not provided. A rectangular window will be applied,which is known to cause spectral leakage. Other windows such as torch.hann_window or torch.hamming_window are recommended to reduce spectral leakage.To suppress this warning and use a rectangular window, explicitly set `window=torch.ones(n_fft, device=<device>)`. (Triggered internally at /pytorch/aten/src/ATen/native/SpectralOps.cpp:836.)
+  return _VF.stft(  # type: ignore[attr-defined]
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 0: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:05<00:00,  2.43it/s, loss=3.66, v_num=-100]{'accuracy': 0.23676880222841226, 'cohen_kappa': -0.01618818376222908, 'f1_weighted': 0.15762834390638578}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py:1609: PossibleUserWarning: The number of training batches (10) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
+  rank_zero_warn(
+Epoch 1: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=2.74, v_num=-100]{'accuracy': 0.23676880222841226, 'cohen_kappa': -0.017438973934629454, 'f1_weighted': 0.1699491785962384}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 2: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.37it/s, loss=1.65, v_num=-100]{'accuracy': 0.22284122562674094, 'cohen_kappa': -0.0349135169762973, 'f1_weighted': 0.18509306040674772}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 3: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=1.45, v_num=-100]{'accuracy': 0.28133704735376047, 'cohen_kappa': 0.04119997515579399, 'f1_weighted': 0.24523569428627087}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 4: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.33it/s, loss=1.42, v_num=-100]{'accuracy': 0.24512534818941503, 'cohen_kappa': -0.007372355736873004, 'f1_weighted': 0.11437399269718493}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 5: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.35it/s, loss=1.41, v_num=-100]{'accuracy': 0.23119777158774374, 'cohen_kappa': -0.025947938453892094, 'f1_weighted': 0.11380576549042082}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 6: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=1.42, v_num=-100]{'accuracy': 0.2618384401114206, 'cohen_kappa': 0.015430629437211518, 'f1_weighted': 0.1631731671760165}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 7: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.27it/s, loss=1.45, v_num=-100]{'accuracy': 0.25348189415041783, 'cohen_kappa': 0.006546475848254074, 'f1_weighted': 0.18433806954876703}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 8: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.28it/s, loss=1.45, v_num=-100]{'accuracy': 0.2590529247910863, 'cohen_kappa': 0.01115241635687736, 'f1_weighted': 0.1629471301051473}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 9: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=1.41, v_num=-100]{'accuracy': 0.2841225626740947, 'cohen_kappa': 0.04604201993465418, 'f1_weighted': 0.2758590829160548}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 10: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=1.4, v_num=-100]{'accuracy': 0.2562674094707521, 'cohen_kappa': 0.007465777538467999, 'f1_weighted': 0.1851991831382359}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 11: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=1.4, v_num=-100]{'accuracy': 0.2618384401114206, 'cohen_kappa': 0.014880089466926205, 'f1_weighted': 0.18231497708856806}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 12: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.15it/s, loss=1.39, v_num=-100]{'accuracy': 0.23119777158774374, 'cohen_kappa': -0.025820478310384143, 'f1_weighted': 0.1675938824990173}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 13: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.38it/s, loss=1.38, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.00038299105664130195, 'f1_weighted': 0.23814792230457085}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 14: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.25it/s, loss=1.38, v_num=-100]{'accuracy': 0.2757660167130919, 'cohen_kappa': 0.03345724907063197, 'f1_weighted': 0.2312713520597305}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 15: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.23it/s, loss=1.38, v_num=-100]{'accuracy': 0.25348189415041783, 'cohen_kappa': 0.0037381048533234873, 'f1_weighted': 0.11139920738369595}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 16: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.26it/s, loss=1.39, v_num=-100]{'accuracy': 0.2395543175487465, 'cohen_kappa': -0.014806838067034533, 'f1_weighted': 0.14565653948306018}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 17: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=1.4, v_num=-100]{'accuracy': 0.2841225626740947, 'cohen_kappa': 0.04502499663606341, 'f1_weighted': 0.24428634820908768}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 18: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=1.37, v_num=-100]{'accuracy': 0.2479108635097493, 'cohen_kappa': -0.0035512025427852922, 'f1_weighted': 0.1856717930282829}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 19: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.06it/s, loss=1.36, v_num=-100]{'accuracy': 0.28133704735376047, 'cohen_kappa': 0.041765381392317225, 'f1_weighted': 0.2537126436805224}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 20: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.17it/s, loss=1.35, v_num=-100]{'accuracy': 0.24233983286908078, 'cohen_kappa': -0.011152416356877248, 'f1_weighted': 0.17982679081454117}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 21: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=1.35, v_num=-100]{'accuracy': 0.29526462395543174, 'cohen_kappa': 0.06146215448204606, 'f1_weighted': 0.23520361127747771}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 22: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.11it/s, loss=1.36, v_num=-100]{'accuracy': 0.2757660167130919, 'cohen_kappa': 0.034826487984447985, 'f1_weighted': 0.25051909684772833}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 23: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=1.37, v_num=-100]{'accuracy': 0.2618384401114206, 'cohen_kappa': 0.014869888475836479, 'f1_weighted': 0.14856269583452933}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 24: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.34it/s, loss=1.37, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.002839559713359363, 'f1_weighted': 0.18708946744244834}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 25: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=1.37, v_num=-100]{'accuracy': 0.2590529247910863, 'cohen_kappa': 0.011172895115612036, 'f1_weighted': 0.16817965082379177}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 26: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.34it/s, loss=1.35, v_num=-100]{'accuracy': 0.298050139275766, 'cohen_kappa': 0.06359458452366151, 'f1_weighted': 0.26640958695516376}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 27: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=1.32, v_num=-100]{'accuracy': 0.2479108635097493, 'cohen_kappa': -0.0036966854089652834, 'f1_weighted': 0.19452797535591554}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 28: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=1.3, v_num=-100]{'accuracy': 0.27298050139275765, 'cohen_kappa': 0.030031055900621162, 'f1_weighted': 0.263246188967054}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 29: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=1.27, v_num=-100]{'accuracy': 0.25069637883008355, 'cohen_kappa': 0.0012617252541549107, 'f1_weighted': 0.22790861242540705}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 30: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=1.23, v_num=-100]{'accuracy': 0.28133704735376047, 'cohen_kappa': 0.04139843927883935, 'f1_weighted': 0.25291527247680834}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 31: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.34it/s, loss=1.2, v_num=-100]{'accuracy': 0.2618384401114206, 'cohen_kappa': 0.014992286427217949, 'f1_weighted': 0.2279869659360394}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 32: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.38it/s, loss=1.17, v_num=-100]{'accuracy': 0.26740947075208915, 'cohen_kappa': 0.023871554700907738, 'f1_weighted': 0.23451265712727884}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 33: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=1.11, v_num=-100]{'accuracy': 0.2590529247910863, 'cohen_kappa': 0.011684588555519793, 'f1_weighted': 0.2294410350079114}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 34: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.33it/s, loss=1.05, v_num=-100]{'accuracy': 0.24512534818941503, 'cohen_kappa': -0.007122079481578725, 'f1_weighted': 0.17130634096196024}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 35: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.34it/s, loss=0.985, v_num=-100]{'accuracy': 0.25348189415041783, 'cohen_kappa': 0.004706880321102447, 'f1_weighted': 0.24823366528807436}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 36: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.33it/s, loss=0.88, v_num=-100]{'accuracy': 0.28690807799442897, 'cohen_kappa': 0.04903614333164319, 'f1_weighted': 0.2851730639115592}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 37: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.99it/s, loss=0.753, v_num=-100]{'accuracy': 0.2590529247910863, 'cohen_kappa': 0.012042458979080961, 'f1_weighted': 0.257210193836485}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 38: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.602, v_num=-100]{'accuracy': 0.2924791086350975, 'cohen_kappa': 0.05658269101443281, 'f1_weighted': 0.2910419520339102}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 39: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=0.453, v_num=-100]{'accuracy': 0.29526462395543174, 'cohen_kappa': 0.059927341979154836, 'f1_weighted': 0.2880828978987812}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 40: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.33it/s, loss=0.369, v_num=-100]{'accuracy': 0.27019498607242337, 'cohen_kappa': 0.026878828008607858, 'f1_weighted': 0.2628587436629538}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 41: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  2.98it/s, loss=0.311, v_num=-100]{'accuracy': 0.26740947075208915, 'cohen_kappa': 0.02326567769432919, 'f1_weighted': 0.24255545832121286}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 42: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.245, v_num=-100]{'accuracy': 0.30919220055710306, 'cohen_kappa': 0.07904917557978364, 'f1_weighted': 0.3096335168236282}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 43: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.175, v_num=-100]{'accuracy': 0.28690807799442897, 'cohen_kappa': 0.0491935567303613, 'f1_weighted': 0.27209232455209714}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 44: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=0.126, v_num=-100]{'accuracy': 0.28969359331476324, 'cohen_kappa': 0.05258419059052433, 'f1_weighted': 0.27973165129707706}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 45: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.36it/s, loss=0.105, v_num=-100]{'accuracy': 0.2757660167130919, 'cohen_kappa': 0.03421730627955344, 'f1_weighted': 0.27376633950217405}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 46: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.28it/s, loss=0.102, v_num=-100]{'accuracy': 0.2924791086350975, 'cohen_kappa': 0.05702171664943123, 'f1_weighted': 0.28950270407412493}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 47: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=0.113, v_num=-100]{'accuracy': 0.30919220055710306, 'cohen_kappa': 0.07886813925818636, 'f1_weighted': 0.3078635179291993}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 48: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.28it/s, loss=0.131, v_num=-100]{'accuracy': 0.26740947075208915, 'cohen_kappa': 0.022871454148426396, 'f1_weighted': 0.2565060460343237}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 49: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.33it/s, loss=0.118, v_num=-100]{'accuracy': 0.3370473537604457, 'cohen_kappa': 0.11586419561460704, 'f1_weighted': 0.33041069338085527}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 50: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.27it/s, loss=0.079, v_num=-100]{'accuracy': 0.30919220055710306, 'cohen_kappa': 0.07889672867222586, 'f1_weighted': 0.299546010381055}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 51: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.36it/s, loss=0.0514, v_num=-100]{'accuracy': 0.31197771587743733, 'cohen_kappa': 0.08233553074128885, 'f1_weighted': 0.3097385449191993}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 52: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.33it/s, loss=0.039, v_num=-100]{'accuracy': 0.2841225626740947, 'cohen_kappa': 0.04538070750861378, 'f1_weighted': 0.28139740670229807}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 53: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.26it/s, loss=0.0353, v_num=-100]{'accuracy': 0.3008356545961003, 'cohen_kappa': 0.06782185899756898, 'f1_weighted': 0.29685840818646547}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 54: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=0.0253, v_num=-100]{'accuracy': 0.3064066852367688, 'cohen_kappa': 0.07516346631352433, 'f1_weighted': 0.30479034404091293}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 55: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.25it/s, loss=0.0205, v_num=-100]{'accuracy': 0.3008356545961003, 'cohen_kappa': 0.06732013290136951, 'f1_weighted': 0.2917682948690759}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 56: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.47it/s, loss=0.0206, v_num=-100]{'accuracy': 0.28969359331476324, 'cohen_kappa': 0.05304480051306981, 'f1_weighted': 0.28906954840932786}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 57: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.0218, v_num=-100]{'accuracy': 0.298050139275766, 'cohen_kappa': 0.06437901399273993, 'f1_weighted': 0.2893907934558606}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 58: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=0.0194, v_num=-100]{'accuracy': 0.30362116991643456, 'cohen_kappa': 0.0713627944995705, 'f1_weighted': 0.28816389200010234}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 59: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=0.0187, v_num=-100]{'accuracy': 0.2757660167130919, 'cohen_kappa': 0.03432721554346241, 'f1_weighted': 0.2646295208969303}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 60: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=0.0296, v_num=-100]{'accuracy': 0.28969359331476324, 'cohen_kappa': 0.053083980677927634, 'f1_weighted': 0.28234112896238656}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 61: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.21it/s, loss=0.0401, v_num=-100]{'accuracy': 0.2785515320334262, 'cohen_kappa': 0.03856851857596344, 'f1_weighted': 0.26907615990405814}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 62: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.0483, v_num=-100]{'accuracy': 0.30362116991643456, 'cohen_kappa': 0.07190056151308655, 'f1_weighted': 0.2993414400569393}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 63: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.18it/s, loss=0.0462, v_num=-100]{'accuracy': 0.2841225626740947, 'cohen_kappa': 0.04598283528073621, 'f1_weighted': 0.277462828870905}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 64: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.24it/s, loss=0.0416, v_num=-100]{'accuracy': 0.28133704735376047, 'cohen_kappa': 0.042290512035735084, 'f1_weighted': 0.27245451976524426}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 65: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.28it/s, loss=0.0471, v_num=-100]{'accuracy': 0.2924791086350975, 'cohen_kappa': 0.05687542017893166, 'f1_weighted': 0.2900110935073955}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 66: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=0.0402, v_num=-100]{'accuracy': 0.29526462395543174, 'cohen_kappa': 0.060141350800401616, 'f1_weighted': 0.29074924068436797}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 67: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.46it/s, loss=0.0277, v_num=-100]{'accuracy': 0.30362116991643456, 'cohen_kappa': 0.07143004945475617, 'f1_weighted': 0.30248926104068347}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 68: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=0.019, v_num=-100]{'accuracy': 0.29526462395543174, 'cohen_kappa': 0.060462181396888415, 'f1_weighted': 0.293728786616954}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 69: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.23it/s, loss=0.0134, v_num=-100]{'accuracy': 0.28969359331476324, 'cohen_kappa': 0.05280965141905236, 'f1_weighted': 0.289180097070478}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 70: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.0216, v_num=-100]{'accuracy': 0.2646239554317549, 'cohen_kappa': 0.01981549662846982, 'f1_weighted': 0.2633013897729381}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 71: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=0.0314, v_num=-100]{'accuracy': 0.28133704735376047, 'cohen_kappa': 0.042141948560968756, 'f1_weighted': 0.27940498019129384}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 72: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.0423, v_num=-100]{'accuracy': 0.27298050139275765, 'cohen_kappa': 0.030943934802618478, 'f1_weighted': 0.2643993371461115}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 73: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.062, v_num=-100]{'accuracy': 0.3008356545961003, 'cohen_kappa': 0.06774470550503309, 'f1_weighted': 0.29749421755176625}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 74: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.31it/s, loss=0.0589, v_num=-100]{'accuracy': 0.2562674094707521, 'cohen_kappa': 0.008379628192793476, 'f1_weighted': 0.25135960976120725}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 75: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.34it/s, loss=0.0436, v_num=-100]{'accuracy': 0.2757660167130919, 'cohen_kappa': 0.03425727617924301, 'f1_weighted': 0.2662176175706722}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 76: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.32it/s, loss=0.0371, v_num=-100]{'accuracy': 0.30362116991643456, 'cohen_kappa': 0.07105521916886604, 'f1_weighted': 0.2914762379656822}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 77: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.30it/s, loss=0.03, v_num=-100]{'accuracy': 0.28969359331476324, 'cohen_kappa': 0.052917442582247176, 'f1_weighted': 0.2878448767695892}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 78: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.29it/s, loss=0.0225, v_num=-100]{'accuracy': 0.26740947075208915, 'cohen_kappa': 0.02366967923396679, 'f1_weighted': 0.26540868556750924}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 79: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:03<00:00,  3.28it/s, loss=0.0222, v_num=-100]{'accuracy': 0.27298050139275765, 'cohen_kappa': 0.030903844363771915, 'f1_weighted': 0.26300183654931164}
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Epoch 79: 100%|████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:04<00:00,  3.21it/s, loss=0.0222, v_num=-100]
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Testing DataLoader 0: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  6.76it/s]
+You are using a CUDA device ('NVIDIA A30') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Restoring states from the checkpoint path at ./pretrain_models/best-epoch=49-val_cohen=0.1159.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2]
+Loaded model weights from checkpoint at ./pretrain_models/best-epoch=49-val_cohen=0.1159.ckpt
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃[1m [0m[1m  Runningstage.testing   [0m[1m [0m┃[1m                           [0m┃
+┃[1m [0m[1m         metric          [0m[1m [0m┃[1m [0m[1m      DataLoader 0       [0m[1m [0m┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│[36m [0m[36m        test_acc         [0m[36m [0m│[35m [0m[35m   0.2851405739784241    [0m[35m [0m│
+│[36m [0m[36m       test_cohen        [0m[36m [0m│[35m [0m[35m   0.04671570658683777   [0m[35m [0m│
+│[36m [0m[36m         test_f1         [0m[36m [0m│[35m [0m[35m   0.2779841125011444    [0m[35m [0m│
+└───────────────────────────┴───────────────────────────┘
+{'test_acc': 0.2851405739784241, 'test_cohen': 0.04671570658683777, 'test_f1': 0.2779841125011444}

@@ -1,0 +1,119 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+You are using a CUDA device ('NVIDIA A30') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2]
+
+  | Name  | Type           | Params
+-----------------------------------------
+0 | model | BIOTClassifier | 3.2 M
+-----------------------------------------
+3.2 M     Trainable params
+22        Non-trainable params
+3.2 M     Total params
+12.755    Total estimated model params size (MB)
+Sanity Checking DataLoader 0:   0%|                                                                                                       | 0/2 [00:00<?, ?it/s]
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:488: PossibleUserWarning: Your `val_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
+  rank_zero_warn(
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 40 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/run_multiclass_supervised.py", line 401, in <module>
+[rank0]:     supervised(args)
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/run_multiclass_supervised.py", line 345, in supervised
+[rank0]:     trainer.fit(
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 608, in fit
+[rank0]:     call._call_and_handle_interrupt(
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 36, in _call_and_handle_interrupt
+[rank0]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 88, in launch
+[rank0]:     return function(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 650, in _fit_impl
+[rank0]:     self._run(model, ckpt_path=self.ckpt_path)
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1112, in _run
+[rank0]:     results = self._run_stage()
+[rank0]:               ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1191, in _run_stage
+[rank0]:     self._run_train()
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1204, in _run_train
+[rank0]:     self._run_sanity_check()
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1276, in _run_sanity_check
+[rank0]:     val_loop.run()
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+[rank0]:     self.advance(*args, **kwargs)
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 152, in advance
+[rank0]:     dl_outputs = self.epoch_loop.run(self._data_fetcher, dl_max_batches, kwargs)
+[rank0]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+[rank0]:     self.advance(*args, **kwargs)
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 137, in advance
+[rank0]:     output = self._evaluation_step(**kwargs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 234, in _evaluation_step
+[rank0]:     output = self.trainer._call_strategy_hook(hook_name, *kwargs.values())
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1494, in _call_strategy_hook
+[rank0]:     output = fn(*args, **kwargs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/strategies/ddp.py", line 359, in validation_step
+[rank0]:     return self.model(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1648, in forward
+[rank0]:     else self._run_ddp_forward(*inputs, **kwargs)
+[rank0]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1474, in _run_ddp_forward
+[rank0]:     return self.module(*inputs, **kwargs)  # type: ignore[index]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/pytorch_lightning/overrides/base.py", line 110, in forward
+[rank0]:     return self._forward_module.validation_step(*inputs, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/run_multiclass_supervised.py", line 55, in validation_step
+[rank0]:     convScore = self.model(X)
+[rank0]:                 ^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/model/biot.py", line 171, in forward
+[rank0]:     x = self.biot(x)
+[rank0]:         ^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/model/biot.py", line 135, in forward
+[rank0]:     channel_spec_emb = self.stft(x[:, i : i + 1, :])
+[rank0]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/hieupc/New_CBraMod/BIOT/model/biot.py", line 121, in stft
+[rank0]:     window=self.window,
+[rank0]:            ^^^^^^^^^^^
+[rank0]:   File "/mnt/disk1/aiotlab/envs/hieupcvp/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1962, in __getattr__
+[rank0]:     raise AttributeError(
+[rank0]: AttributeError: 'BIOTEncoder' object has no attribute 'window'
